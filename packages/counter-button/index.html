@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter App</title>
+
+    <style>
+      .counter-container {
+        border: 1px solid black;
+        border-radius: 3px;
+        display: inline-block;
+      }
+      .counter-button {
+        font-size: 12pt;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="counter-container">
+      <counter-container
+        basepath=""
+        url=""
+        >
+        <counter-increment-button>
+          <span class="counter-button">
+            &#x1f31f;
+            <counter-display>
+              <span slot="loading">...</span>
+            </counter-display>
+          </span>
+        </counter-increment-button>
+      </counter-container>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

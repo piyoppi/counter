@@ -1,0 +1,12 @@
+{
+  "name": "@piyoppi/counter",
+  "version": "0.1.0",
+  "description": "Simple counter tools for web pages",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "cd packages/counter && npm test"
+  },
+  "author": "piyoppi"
+}

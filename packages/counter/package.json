@@ -1,0 +1,27 @@
+{
+  "name": "@piyoppi/counter-api",
+  "version": "1.0.0",
+  "description": "counter api",
+  "main": "src/handler.js",
+  "author": "piyoppi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url":"https://github.com/piyoppi/counter"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.25",
+    "esbuild-jest": "^0.5.0",
+    "jest": "^27.5.1",
+    "serverless-esbuild": "^1.26.1"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.54.0",
+    "@aws-sdk/client-s3": "^3.54.1",
+    "fast-xml-parser": "^4.0.7",
+    "node-fetch": "^3.2.3"
+  }
+}

@@ -1,0 +1,32 @@
+name: Node.js Package
+
+on: workflow_dispatch
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          registry-url: https://npm.pkg.github.com/
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - run: npm install
+
+      - name: Build counter-button
+        run: npm run build
+        working-directory: ./packages/counter-button
+
+      - run: npm publish
+        working-directory: ./packages/counter-button
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

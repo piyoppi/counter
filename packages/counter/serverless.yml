@@ -1,0 +1,87 @@
+service: counter
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+          Resource:
+            Fn::Join:
+              - ':'
+              - - 'arn:aws:dynamodb'
+                - ${aws:region}
+                - '*'
+                - 'table/CounterStore'
+        - Effect: Allow
+          Action:
+            - s3:ListBucket
+            - s3:GetObject
+            - s3:PutObject
+          Resource:
+            Fn::Join:
+              - ''
+              - - 'arn:aws:s3:::'
+                - Ref: WhitelistUrlBucket
+                - '/*'
+  environment:
+    URLLIST_BUCKET: ${param:bucket}
+    URLLIST_KEY: ${param:urllist}
+    SITEMAP_URL: ${param:sitemap}
+  httpApi:
+    cors:
+      allowedOrigins:
+        - ${param:origin}
+
+plugins:
+  - serverless-esbuild
+
+functions:
+  increment:
+    handler: src/handler.increment
+    events:
+      - httpApi:
+          path: /count
+          method: post
+  current:
+    handler: src/handler.current
+    events:
+      - httpApi:
+          path: /current
+          method: get
+          parameters:
+            queryStrings:
+              url: true
+  updateUrlList:
+    handler: src/handler.updateUrlList
+    events:
+      - httpApi:
+          path: /update-url
+          method: post
+          authorizer:
+            type: aws_iam
+
+resources:
+  Resources:
+    CounterStore:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: CounterStore
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: url
+            AttributeType: S
+        KeySchema:
+          - AttributeName: url
+            KeyType: HASH
+    WhitelistUrlBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${param:bucket}

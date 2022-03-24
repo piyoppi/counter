@@ -5,12 +5,14 @@
   export let apiurl = ''
   export let addition = '0'
   let count = 0
+  let fetched = false
   $: displayedCount = count + parseInt(addition, 10)
   $: valid = url && apiurl
 
   async function fetchCount() {
-    if (!valid) return
+    if (!valid || fetched) return
 
+    fetched = true
     const urlParam = encodeURIComponent(url)
     const response = await fetch(`${apiurl}/current?url=${url}`)
     const responseJson = await response.json()

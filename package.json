@@ -1,6 +1,6 @@
 {
   "name": "@piyoppi/counter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple counter tools for web pages",
   "workspaces": [
     "packages/*"

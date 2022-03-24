@@ -28,7 +28,7 @@ export class Counter {
     this.#count++
   }
 
-  save(saveRecord) {
-    saveRecord('CounterStore', {url: this.#url, count: this.#count})
+  async save(saveRecord) {
+    await saveRecord('CounterStore', {url: this.#url, count: this.#count})
   }
 }

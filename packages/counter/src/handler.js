@@ -90,7 +90,7 @@ export const updateUrlList = async (event) => {
     const currentUrlList = new UrlWhiteListFromSitemap(sitemapUrl)
     const cachedUrlList = createUrlListFromCache()
     await currentUrlList.fetch()
-    cachedUrlList.update(currentUrlList)
+    await cachedUrlList.update(currentUrlList)
 
     return {
       statusCode: 201,

@@ -25,6 +25,6 @@ export class UrlWhiteListFromCache extends UrlWhiteList {
 
   async update(fromWhiteList) {
     this.#sitemapUrls = fromWhiteList.urls
-    this.#saveObject(JSON.stringify(this.#sitemapUrls))
+    await this.#saveObject(JSON.stringify(this.#sitemapUrls))
   }
 }

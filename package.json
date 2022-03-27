@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "(cd packages/counter && npm test) && (cd packages/url-whitelist-sitemap && npm test) && (cd packages/actions-upload-url-whitelist-to-s3 && npm test)"
+    "test": "(cd packages/counter && npm test) && (cd packages/url-whitelist-sitemap && npm test)"
   },
   "author": "piyoppi"
 }

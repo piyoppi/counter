@@ -2,7 +2,8 @@ jest.mock('node-fetch')
 
 import fetch from 'node-fetch'
 const { Response } = jest.requireActual('node-fetch')
-import { UrlWhiteListFromSitemap } from '../../src/urlWhitelist/urlWhiteListFromSitemap.js'
+import { SitemapToUrlList } from '../src/sitemapToUrlList.js'
+import { SitemapRequestor } from '../src/sitemapRequestor.js'
 
 const siteMapIndexXml = `
   <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -57,7 +58,7 @@ fetch.mockImplementation((url) => {
 
 describe('fetch', () => {
   test('Should set parsed sitemap', async () => {
-    const sitemapIndex = new UrlWhiteListFromSitemap('https://localhost/sitemap/index.xml')
+    const sitemapIndex = new SitemapToUrlList('https://localhost/sitemap/index.xml', new SitemapRequestor())
     await sitemapIndex.fetch()
 
     expect(sitemapIndex.urls).toEqual([
@@ -67,7 +68,7 @@ describe('fetch', () => {
       'https://localhost/posts/4'
     ])
 
-    const sitemapIndex2 = new UrlWhiteListFromSitemap('https://localhost/sitemap/index2.xml')
+    const sitemapIndex2 = new SitemapToUrlList('https://localhost/sitemap/index2.xml', new SitemapRequestor())
     await sitemapIndex2.fetch()
 
     expect(sitemapIndex2.urls).toEqual([
@@ -75,7 +76,7 @@ describe('fetch', () => {
       'https://localhost/posts/2'
     ])
 
-    const sitemap = new UrlWhiteListFromSitemap('https://localhost/sitemap/sitemap-0.xml')
+    const sitemap = new SitemapToUrlList('https://localhost/sitemap/sitemap-0.xml', new SitemapRequestor())
     await sitemap.fetch()
 
     expect(sitemap.urls).toEqual([

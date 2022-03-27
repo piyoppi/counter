@@ -1,0 +1,24 @@
+{
+  "name": "@piyoppi/counter-tools-url-whitelist-sitemap",
+  "version": "0.1.2",
+  "description": "counter api",
+  "main": "src/index.js",
+  "author": "piyoppi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url":"https://github.com/piyoppi/counter"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "esbuild": "^0.14.25",
+    "esbuild-jest": "^0.5.0"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.0.7",
+    "node-fetch": "^3.2.3"
+  }
+}

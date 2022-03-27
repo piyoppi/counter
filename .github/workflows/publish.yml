@@ -31,10 +31,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Build counter-tools-url-whitelist-sitemap
-        run: npm run build
-        working-directory: ./packages/url-whitelist-sitemap
-
       - run: npm publish
         working-directory: ./packages/url-whitelist-sitemap
         env:

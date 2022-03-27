@@ -5,6 +5,19 @@ Custom elements that increment counts, display counts.
 This elements call API provided by [@piyoppi/counter-api](../counter).
 The API must be deployed previously.
 
+## Install
+
+To get packages from github package registry, you should edit .npmrc file. Show an example below. (authToken must have the read:packages scope. [ref](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry))
+
+```
+//npm.pkg.github.com/:_authToken=xxxxxxxx
+@piyoppi:registry=https://npm.pkg.github.com
+```
+
+```
+npm install --save @piyoppi/counter-button
+```
+
 ## Example
 
 Displays the count of the page on which this element is placed. It also places a vote button.

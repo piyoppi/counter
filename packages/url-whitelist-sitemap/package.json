@@ -1,7 +1,7 @@
 {
   "name": "@piyoppi/counter-tools-url-whitelist-sitemap",
   "version": "0.1.2",
-  "description": "counter api",
+  "description": "",
   "main": "src/index.js",
   "author": "piyoppi",
   "license": "MIT",

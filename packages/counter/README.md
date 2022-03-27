@@ -1,8 +1,13 @@
 # @piyoppi/counter-api
 
-Counte apis running on the AWS.
+Counter apis running on the AWS.
 
 ## Deploying
+
+This application is managed using Serverless Framework.
+To deploy, you will need to install serverless on your machine.
+
+You can deploy with the following command.
 
 ```
  serverless deploy \
@@ -21,8 +26,12 @@ Counte apis running on the AWS.
 
 ## APIs
 
+The API provided by this application is as follows.
+
 | Path | Query Parameters | Body | Detail |
 | --- | --- | --- | --- |
 | POST /count | - | `{"url": "the url of page"}` | Increment count |
 | GET /current | `url=(the url of page)` | - | Get the current value of count |
 | POST /update-url | - | - | Update whitelist url using sitemap |
+
+The request and response format is `application/json`.

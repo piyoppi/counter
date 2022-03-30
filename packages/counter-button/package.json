@@ -7,7 +7,7 @@
   "main": "dist/counter-button.es.js",
   "repository": {
     "type": "git",
-    "url":"https://github.com/piyoppi/counter"
+    "url":"https://github.com/piyoppi/counter-tools"
   },
   "scripts": {
     "dev": "vite",

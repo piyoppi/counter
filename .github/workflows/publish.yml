@@ -68,6 +68,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
+          registry-url: https://registry.npmjs.org/
           node-version: '16'
 
       - uses: actions/download-artifact@v3

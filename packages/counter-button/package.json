@@ -9,6 +9,9 @@
     "type": "git",
     "url":"https://github.com/piyoppi/counter-tools"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

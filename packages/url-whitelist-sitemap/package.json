@@ -12,6 +12,9 @@
   "scripts": {
     "test": "jest"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "jest": "^27.5.1",
     "esbuild": "^0.14.25",

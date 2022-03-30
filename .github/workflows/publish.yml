@@ -26,12 +26,20 @@ jobs:
         run: npm run build
         working-directory: ./packages/counter-button
 
-      - run: npm publish
+      - name: publish @piyoppi/counter-button (gpr)
+        run: npm publish
         working-directory: ./packages/counter-button
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - run: npm publish
+      - name: publish @piyoppi/counter-button (npm)
+        run: npm publish
+        working-directory: ./packages/counter-button
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - name: publish @piyoppi/url-whitelist-sitemap (gpr)
+        run: npm publish
         working-directory: ./packages/url-whitelist-sitemap
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

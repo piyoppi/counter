@@ -3,7 +3,7 @@ name: Node.js Package
 on: workflow_dispatch
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -11,7 +11,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-          registry-url: https://npm.pkg.github.com/
 
       - name: Cache dependencies
         uses: actions/cache@v2
@@ -26,20 +25,58 @@ jobs:
         run: npm run build
         working-directory: ./packages/counter-button
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built-apps
+          path: packages/counter-button/dist
+          if-no-files-found: error
+
+
+  publish_gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          registry-url: https://npm.pkg.github.com/
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: built-apps
+          path: packages/counter-button/dist
+
       - name: publish @piyoppi/counter-button (gpr)
-        run: npm publish
         working-directory: ./packages/counter-button
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-      - name: publish @piyoppi/counter-button (npm)
-        run: npm publish
-        working-directory: ./packages/counter-button
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
       - name: publish @piyoppi/url-whitelist-sitemap (gpr)
-        run: npm publish
         working-directory: ./packages/url-whitelist-sitemap
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  publish_npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: built-apps
+          path: packages/counter-button/dist
+
+      - name: publish @piyoppi/counter-button (npm)
+        working-directory: ./packages/counter-button
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
